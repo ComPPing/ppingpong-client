@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')
+const withPWA = require('next-pwa');
 
 const config = {
-  output: 'export'
-}
-  
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+};
+
 const nextConfig = withPWA({
   dest: 'public',
-})(config)
+})(config);
 
-module.exports = nextConfig
+module.exports = nextConfig;
