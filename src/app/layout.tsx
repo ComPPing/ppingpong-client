@@ -18,14 +18,6 @@ export const metadata: Metadata = {
     siteName: 'ppingpong',
     locale: 'ko_KR',
     url: 'https://ppingpong.pages.dev/',
-    images: [
-      {
-        url: '/opengraph-image.png',
-        width: 1200,
-        height: 630,
-        alt: '핑퐁 로고',
-      },
-    ],
   },
 };
 
