@@ -7,8 +7,8 @@ import { calculateStyle } from '@/utils/calculateStyle';
 
 import { Button } from './Button';
 
-const kakaoURL = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/kakao`;
-const googleURL = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`;
+const kakaoURL = `${process.env.NEXT_PUBLIC_BASE_URL}/oauth2/authorization/kakao`;
+const googleURL = `${process.env.NEXT_PUBLIC_BASE_URL}/oauth2/authorization/google`;
 
 interface SocialLoginButtonProps {
   provider: 'kakao' | 'google';
