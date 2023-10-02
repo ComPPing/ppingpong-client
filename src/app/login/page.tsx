@@ -8,7 +8,7 @@ const page = () => {
     <main className="h-screen bg-primary-50 fixed w-screen flex items-center justify-center flex-col p-6">
       <div className="flex-1 flex items-center">
         <Image
-          src="/assets/icons/logo.svg"
+          src="/assets/images/logo.png"
           alt="핑퐁 로고"
           width="280"
           height="170"
