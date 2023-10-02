@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 
+import clsx from 'clsx';
+
 import './globals.css';
 
 const notoSansKR = Noto_Sans_KR({
@@ -9,7 +11,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'ppingpong',
+  title: '핑퐁',
   description: '위치기반 장소 추천 서비스',
   metadataBase: new URL('https://ppingpong.pages.dev/'),
   openGraph: {
@@ -28,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={notoSansKR.className}>{children}</body>
+    <html lang="ko">
+      <body className={clsx(notoSansKR.className)}>{children}</body>
     </html>
   );
 }
