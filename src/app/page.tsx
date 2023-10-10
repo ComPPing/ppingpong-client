@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { Loading } from '@/app/loading/Loading';
+import { Loading } from '@/components/loading';
 
 export default function Home() {
   // @fixme: 임시로 로그인 체크를 위해 작성
