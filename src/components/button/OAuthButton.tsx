@@ -7,8 +7,8 @@ import { calculateStyle } from '@/utils/calculateStyle';
 
 import { Button } from './Button';
 
-const kakaoURL = `${process.env.NEXT_PUBLIC_BASE_URL}/oauth2/authorization/kakao`;
-const googleURL = `${process.env.NEXT_PUBLIC_BASE_URL}/oauth2/authorization/google`;
+const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`;
+const GOOGLE_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&response_type=code&scope=openid%20profile%20email%20https://www.googleapis.com/auth/user.birthday.read%20https://www.googleapis.com/auth/user.gender.read`;
 
 interface SocialLoginButtonProps {
   provider: 'kakao' | 'google';
@@ -30,7 +30,7 @@ const OAuthButton = ({ provider }: SocialLoginButtonProps) => {
   };
 
   const handleClick = () => {
-    window.location.href = provider === 'kakao' ? kakaoURL : googleURL;
+    window.location.href = provider === 'kakao' ? KAKAO_URL : GOOGLE_URL;
   };
 
   return (
