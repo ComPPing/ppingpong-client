@@ -11,12 +11,15 @@ const Page = () => {
 
   useEffect(() => {
     const code = searchParams.get('code');
-    try {
-      const data = http.get(`/login/kakao?code=${code}`);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    http
+      .get(`/login/kakao?code=${code}`)
+      .then((res: any) => {
+        localStorage.setItem('token', res.data.accessToken);
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return (
     <div className="flex items-center justify-center h-full">

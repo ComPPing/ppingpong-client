@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-import { httpWithoutBaseUrl } from '@/apis/http';
+import { http } from '@/apis/http';
 import { Loading } from '@/components/loading';
 
 const Page = () => {
@@ -11,20 +11,14 @@ const Page = () => {
 
   useEffect(() => {
     const code = searchParams.get('code');
-    httpWithoutBaseUrl
-      .post(`https://oauth2.googleapis.com/token`, {
-        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
-        redirect_uri: process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI,
-        grant_type: 'authorization_code',
-        code: code,
-      })
+    http
+      .get(`/login/google?code=${code}`)
       .then((res: any) => {
-        fetch(
-          `https://www.googleapis.com/userinfo/v2/me?access_token=${res.access_token!}`,
-        ).then((data) => {
-          console.log(data);
-        });
+        localStorage.setItem('token', res.data.accessToken);
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
   return (
