@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 
 import clsx from 'clsx';
@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: 'https://ppingpong.pages.dev/',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#fff',
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
 };
 
 export default function RootLayout({

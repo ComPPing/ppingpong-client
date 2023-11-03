@@ -60,7 +60,7 @@ export default function Home() {
         />
       </header>
       <main className="flex-1 overflow-scroll">
-        <ol className="text-body3">
+        <ol className="text-body2">
           {messages.map((message) => (
             <Message
               text={message.text}
