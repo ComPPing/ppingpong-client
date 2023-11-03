@@ -9,6 +9,7 @@ type MessageType = {
   id: number;
   sender: 'me' | 'other';
   text: string;
+  time: Date;
 };
 
 const DUMMY_DATA: MessageType[] = [
@@ -16,6 +17,7 @@ const DUMMY_DATA: MessageType[] = [
     id: 0,
     sender: 'other',
     text: '반가워 친구야~ 궁금한거 있으면 뭐든 물어봐!',
+    time: new Date(),
   },
 ];
 
@@ -32,7 +34,12 @@ export default function Home() {
       // todo: api 요청
       setMessages((prev) => [
         ...prev,
-        { id: messages.length + 1, sender: 'me', text: input },
+        {
+          id: messages.length + 1,
+          sender: 'me',
+          text: input,
+          time: new Date(),
+        },
       ]);
       setInput('');
     }
