@@ -11,8 +11,8 @@ interface MessageProps {
 }
 
 const senderStyle = {
-  me: 'mr-3 justify-end',
-  other: 'ml-3',
+  me: 'justify-end',
+  other: '',
 };
 
 const textStyle = {
@@ -22,13 +22,8 @@ const textStyle = {
 
 export const Message = ({ type, sender, text }: MessageProps) => {
   return (
-    <li className={clsx('my-2 flex', calculateStyle(sender, senderStyle))}>
-      <div
-        className={clsx(
-          'w-fit max-w-[250px] p-2.5',
-          calculateStyle(sender, textStyle),
-        )}
-      >
+    <li className={clsx('my-2 mx-3 flex', calculateStyle(sender, senderStyle))}>
+      <div className={clsx('w-fit p-2.5', calculateStyle(sender, textStyle))}>
         {text}
       </div>
     </li>
