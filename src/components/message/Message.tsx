@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 import clsx from 'clsx';
@@ -22,7 +23,21 @@ const textStyle = {
 
 export const Message = ({ type, sender, text }: MessageProps) => {
   return (
-    <li className={clsx('my-2 mx-3 flex', calculateStyle(sender, senderStyle))}>
+    <li
+      className={clsx(
+        'my-2 mx-3 flex items-start',
+        calculateStyle(sender, senderStyle),
+      )}
+    >
+      {sender !== 'me' && (
+        <Image
+          src="/assets/icons/ppingping.svg"
+          width="40"
+          height="40"
+          alt="핑핑이 이미지"
+          className="mr-2"
+        />
+      )}
       <div className={clsx('w-fit p-2.5', calculateStyle(sender, textStyle))}>
         {text}
       </div>
