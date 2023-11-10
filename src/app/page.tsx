@@ -26,6 +26,7 @@ export default function Home() {
   const [messages, setMessages] = useState<MessageType[]>(DUMMY_DATA);
   const contentsRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const homeComponentRef = useRef<HTMLDivElement>(null);
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
@@ -64,7 +65,7 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full max-h-screen flex flex-col" ref={homeComponentRef}>
       <header className="p-3 border-b-2">
         <Image
           src="/assets/images/smallLogo.png"
@@ -85,7 +86,7 @@ export default function Home() {
           />
         ))}
       </ol>
-      <div className="border-t-2 border-gray-100 w-full px-4 pt-3 pb-8 fixed bottom-0">
+      <div className="border-t-2 border-gray-100 w-full px-4 pt-3 pb-5 fixed bottom-0">
         <div className="border-2 border-gray-200 bg-gray-50 rounded-md flex">
           <input
             type="text"
