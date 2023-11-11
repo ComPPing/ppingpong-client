@@ -25,7 +25,7 @@ export const Message = ({ type, sender, text }: MessageProps) => {
   return (
     <li
       className={clsx(
-        'my-2 mx-3 flex items-start',
+        'py-1 px-2 flex items-start',
         calculateStyle(sender, senderStyle),
       )}
     >
