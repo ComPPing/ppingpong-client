@@ -34,9 +34,10 @@ const DUMMY_DATA: MessageType[] = [
     id: '1',
     sender: 'other',
     url: [
-      'http://via.placeholder.com/150x150',
-      'http://via.placeholder.com/150x150',
-      'http://via.placeholder.com/150x150',
+      'http://via.placeholder.com/100x100',
+      'http://via.placeholder.com/100x100',
+      'http://via.placeholder.com/100x100',
+      'http://via.placeholder.com/100x100',
     ],
     text: '여기 어때?!',
     date: new Date(),
