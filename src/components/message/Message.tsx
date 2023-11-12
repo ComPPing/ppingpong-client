@@ -36,7 +36,7 @@ export const TextMessage = ({ text }: TextMessageProps) => {
 export const ImageMessage = ({ urls }: ImageMessageProps) => {
   if (!urls) return null;
   return (
-    <div className="flex gap-1 overflow-x-scroll">
+    <div className="flex gap-1 overflow-x-auto">
       {urls?.map((url) => <img src={url} key={url} />)}
     </div>
   );

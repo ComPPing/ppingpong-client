@@ -106,7 +106,7 @@ export default function Home() {
           height="28"
         />
       </header>
-      <ol className="text-body2 overflow-scroll flex-1" ref={contentsRef}>
+      <ol className="text-body2 overflow-auto flex-1" ref={contentsRef}>
         {messages.map((message) => (
           <Message key={message.id} sender={message.sender}>
             <ImageMessage urls={message.url} />
