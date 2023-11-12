@@ -3,13 +3,14 @@
 import Image from 'next/image';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
-import { Message } from '@/components/message';
+import { ImageMessage, Message, TextMessage } from '@/components/message';
 
 type MessageType = {
   id: string;
   sender: 'me' | 'other';
-  text: string;
-  time: Date;
+  text?: string;
+  url?: string[];
+  date: Date;
 };
 
 const DUMMY_DATA: MessageType[] = [
@@ -17,7 +18,23 @@ const DUMMY_DATA: MessageType[] = [
     id: '0',
     sender: 'other',
     text: '반가워 친구야~ 궁금한거 있으면 뭐든 물어봐!',
-    time: new Date(),
+    date: new Date(),
+  },
+  {
+    id: '2',
+    sender: 'me',
+    text: '음식점 추천해줭',
+    date: new Date(),
+  },
+  {
+    id: '1',
+    sender: 'other',
+    url: [
+      'http://via.placeholder.com/150x150',
+      'http://via.placeholder.com/150x150',
+      'http://via.placeholder.com/150x150',
+    ],
+    date: new Date(),
   },
 ];
 
@@ -26,9 +43,6 @@ export default function Home() {
   const [messages, setMessages] = useState<MessageType[]>(DUMMY_DATA);
   const contentsRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
 
   useEffect(() => {
     // localStorage.getItem('token') ?? window.location.replace('/login');
@@ -40,6 +54,11 @@ export default function Home() {
       behavior: 'smooth',
     });
   }, [messages]);
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setInput(e.target.value);
+  };
 
   const handleKeyUpInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -53,14 +72,28 @@ export default function Home() {
     setMessages((prev) => [
       ...prev,
       {
-        id: (messages.length + 1).toString(),
+        id: new Date().toString(),
         sender: 'me',
+        type: 'text',
         text: input,
-        time: new Date(),
+        date: new Date(),
       },
     ]);
+    inputRef.current?.setAttribute('disabled', 'disabled');
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: new Date().toString(),
+          sender: 'other',
+          type: 'text',
+          text: '임시 답장!',
+          date: new Date(),
+        },
+      ]);
+      inputRef.current?.removeAttribute('disabled');
+    }, 1000);
     setInput('');
-    inputRef.current?.focus();
   };
 
   return (
@@ -75,25 +108,25 @@ export default function Home() {
       </header>
       <ol className="text-body2 overflow-scroll flex-1" ref={contentsRef}>
         {messages.map((message) => (
-          <Message
-            text={message.text}
-            sender={message.sender}
-            key={message.id}
-          />
+          <Message key={message.id} sender={message.sender}>
+            <ImageMessage urls={message.url} />
+            <TextMessage text={message.text} />
+          </Message>
         ))}
       </ol>
       <div className="border-t-2 border-gray-100 px-2 pt-2 pb-6 bg-white">
         <div className="border-2 border-gray-200 rounded-xl flex bg-none">
           <input
             type="text"
-            className="p-1.5 w-full text-body2 focus:outline-none rounded-full"
+            className="p-1.5 w-full text-body2 focus:outline-none rounded-xl"
             onChange={handleChangeInput}
             onKeyUp={handleKeyUpInput}
             value={input}
             ref={inputRef}
           />
           <button
-            className="flex justify-center items-center rounded-xl bg-gray-100 m-1"
+            className="flex justify-center items-center rounded-xl m-1 bg-primary-100 disabled:opacity-20 duration-30"
+            disabled={input === ''}
             onClick={handleSendMessage}
           >
             <Image
