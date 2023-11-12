@@ -3,7 +3,11 @@
 import Image from 'next/image';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
-import { ImageMessage, Message, TextMessage } from '@/components/message';
+import {
+  ImageMessage,
+  MessageContainer,
+  TextMessage,
+} from '@/components/message';
 
 type MessageType = {
   id: string;
@@ -34,6 +38,7 @@ const DUMMY_DATA: MessageType[] = [
       'http://via.placeholder.com/150x150',
       'http://via.placeholder.com/150x150',
     ],
+    text: '여기 어때?!',
     date: new Date(),
   },
 ];
@@ -106,12 +111,12 @@ export default function Home() {
           height="28"
         />
       </header>
-      <ol className="text-body2 overflow-auto flex-1" ref={contentsRef}>
+      <ol className="text-body2 overflow-y-auto flex-1" ref={contentsRef}>
         {messages.map((message) => (
-          <Message key={message.id} sender={message.sender}>
+          <MessageContainer key={message.id} sender={message.sender}>
             <ImageMessage urls={message.url} />
             <TextMessage text={message.text} />
-          </Message>
+          </MessageContainer>
         ))}
       </ol>
       <div className="border-t-2 border-gray-100 px-2 pt-2 pb-6 bg-white">

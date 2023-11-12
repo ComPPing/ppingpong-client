@@ -36,13 +36,25 @@ export const TextMessage = ({ text }: TextMessageProps) => {
 export const ImageMessage = ({ urls }: ImageMessageProps) => {
   if (!urls) return null;
   return (
-    <div className="flex gap-1 overflow-x-auto">
-      {urls?.map((url) => <img src={url} key={url} />)}
+    <div className="w-[calc(100vw_-_90px)] overflow-x-auto block whitespace-nowrap">
+      {urls?.map((url) => (
+        <button
+          key={url}
+          type="button"
+          className="w-40 h-40 rounded-lg inline-flex items-center justify-center"
+          onClick={() => {
+            // FIXME: 임시 url
+            window.open('https://naver.me/Fcu6Ydhn');
+          }}
+        >
+          <img src={url} alt="img" className="rounded-lg" />
+        </button>
+      ))}
     </div>
   );
 };
 
-export const Message = ({ sender, children }: MessageProps) => {
+export const MessageContainer = ({ sender, children }: MessageProps) => {
   const AvatarIcon = useCallback(() => {
     return (
       <Image
@@ -63,7 +75,7 @@ export const Message = ({ sender, children }: MessageProps) => {
       )}
     >
       {sender !== 'me' && <AvatarIcon />}
-      <div className={clsx('w-fit p-2.5', calculateStyle(sender, textStyle))}>
+      <div className={clsx('p-2.5', calculateStyle(sender, textStyle))}>
         {children}
       </div>
     </li>
