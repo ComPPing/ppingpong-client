@@ -12,11 +12,11 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: '핑퐁',
-  description: '위치기반 장소 추천 서비스',
+  description: '음식점 추천 서비스',
   metadataBase: new URL('https://ppingpong.pages.dev/'),
   openGraph: {
     title: 'ppingpong',
-    description: '위치기반 장소 추천 서비스',
+    description: '음식점 추천 서비스',
     type: 'website',
     siteName: 'ppingpong',
     locale: 'ko_KR',
