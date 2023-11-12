@@ -125,7 +125,7 @@ export default function Home() {
             ref={inputRef}
           />
           <button
-            className="flex justify-center items-center rounded-xl m-1 bg-primary-100 disabled:opacity-20 duration-30"
+            className="flex justify-center items-center rounded-xl m-1 bg-primary-100 disabled:opacity-20 transition-opacity ease-in-out duration-200"
             disabled={input === ''}
             onClick={handleSendMessage}
           >
