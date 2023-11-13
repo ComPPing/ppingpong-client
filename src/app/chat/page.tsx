@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import {
@@ -44,15 +45,12 @@ const DUMMY_DATA: MessageType[] = [
   },
 ];
 
-export default function Home() {
+export default function Chat() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<MessageType[]>(DUMMY_DATA);
   const contentsRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    // localStorage.getItem('token') ?? window.location.replace('/login');
-  }, []);
+  const router = useRouter();
 
   useEffect(() => {
     contentsRef.current?.scrollTo({
@@ -104,13 +102,22 @@ export default function Home() {
 
   return (
     <Fragment>
-      <header className="p-3 border-b-2 w-full bg-white/95">
-        <Image
-          src="/assets/images/smallLogo.png"
-          alt="logo"
-          width="140"
-          height="28"
-        />
+      <header className="p-3 border-b-2 w-full bg-white/95 h-14 flex items-center">
+        <button
+          type="button"
+          className="flex items-center justify-center"
+          onClick={(e) => {
+            e.preventDefault();
+            router.back();
+          }}
+        >
+          <Image
+            src="/assets/icons/left.svg"
+            alt="logo"
+            width="32"
+            height="32"
+          />
+        </button>
       </header>
       <ol className="text-body2 overflow-y-auto flex-1" ref={contentsRef}>
         {messages.map((message) => (
