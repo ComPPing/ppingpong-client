@@ -14,7 +14,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           height="26"
         />
       </header>
-      <main className=""></main>
       {children}
       <Menubar />
     </Fragment>
