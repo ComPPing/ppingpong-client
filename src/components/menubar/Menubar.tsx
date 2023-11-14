@@ -9,8 +9,8 @@ export const Menubar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-0 w-full flex pt-4 pb-6 px-8 border-t-2 justify-between items-center">
-      <Link href="/main" as="">
+    <div className=" w-full flex pt-4 pb-6 px-8 border-t-2 justify-between items-center">
+      <Link href="/main">
         <Image
           src="/assets/icons/home.svg"
           alt="홈 화면 가기"
