@@ -40,9 +40,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={clsx(notoSansKR.className, 'max-h-screen flex flex-col')}
+        className={clsx(notoSansKR.className, 'w-full m-auto max-h-screen')}
       >
-        {children}
+        <div className="m-auto max-w-md h-full flex flex-col">{children}</div>
       </body>
     </html>
   );
