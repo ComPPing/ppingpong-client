@@ -5,7 +5,7 @@ import { OAuthButton } from '@/components/button';
 
 const page = () => {
   return (
-    <main className="h-full bg-primary-50 w-screen flex items-center justify-center flex-col px-6 py-12">
+    <main className="h-full bg-primary-50 flex items-center justify-center flex-col px-6 py-12">
       <div className="flex-1 flex items-center">
         <Image
           src="/assets/images/logo.png"
