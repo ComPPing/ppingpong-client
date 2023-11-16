@@ -16,8 +16,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const sizeStyle = {
-  sm: 'h-10 text-subtitle1',
-  md: 'h-12 text-subtitle1',
+  sm: 'h-10 text-subtitle2',
+  md: 'h-12 text-subtitle2',
   lg: 'h-14 text-h4',
 };
 
