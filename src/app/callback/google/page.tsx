@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 
 import { http } from '@/apis/http';
 import { Loading } from '@/components/loading';
+import { TOKEN_KEY } from '@/constants/token';
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -14,7 +15,8 @@ const Page = () => {
     http
       .get(`/login/google?code=${code}`)
       .then((res: any) => {
-        localStorage.setItem('token', res.data.accessToken);
+        document.cookie = `${TOKEN_KEY}=${res.data.accessToken}}`;
+        // localStorage.setItem('token', res.data.accessToken);
         window.location.href = '/';
       })
       .catch((err) => {
