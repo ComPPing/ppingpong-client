@@ -10,6 +10,7 @@ type FeedType = {
   category: string;
   place: string;
   description: string;
+  images: string[];
 };
 
 const DUMMY_DATA: FeedType[] = [
@@ -20,6 +21,10 @@ const DUMMY_DATA: FeedType[] = [
     place: '인천대입구역 1번 출구에서 550m',
     description:
       '임시 설명입니다. 임시 설명입니다. 임시 설명입니다. 임시 설명입니다. 임시 설명입니다. 임시 설명입니다.',
+    images: [
+      'http://via.placeholder.com/100x100',
+      'http://via.placeholder.com/100x100',
+    ],
   },
   {
     id: '1',
@@ -28,6 +33,10 @@ const DUMMY_DATA: FeedType[] = [
     place: '인천대입구역 1번 출구에서 550m',
     description:
       '임시 설명입니다. 임시 설명입니다. 임시 설명입니다. 임시 설명입니다. 임시 설명입니다. 임시 설명입니다.',
+    images: [
+      'http://via.placeholder.com/100x100',
+      'http://via.placeholder.com/100x100',
+    ],
   },
 ];
 

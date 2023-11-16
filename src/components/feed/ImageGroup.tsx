@@ -1,14 +1,36 @@
 import React from 'react';
 
-const ImageGroup = () => {
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+interface ImageGroupProps {
+  images: string[];
+  setActiveIndex: (index: number) => void;
+}
+
+const ImageGroup = ({ images, setActiveIndex }: ImageGroupProps) => {
   return (
-    <img
-      src="http://via.placeholder.com/100x100"
-      width="100%"
-      height="100%"
-      className="w-full"
-      alt="임시 이미지"
-    />
+    <Swiper
+      modules={[A11y]}
+      pagination
+      onActiveIndexChange={(swiper) => setActiveIndex(swiper.realIndex)}
+    >
+      {images.map((image) => {
+        return (
+          <SwiperSlide key={image}>
+            <img
+              src={image}
+              width="100%"
+              height="100%"
+              className="w-full"
+              alt="임시 이미지"
+            />
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
   );
 };
 

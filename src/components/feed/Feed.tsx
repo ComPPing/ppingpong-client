@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 
 import Bookmark from './Bookmark';
 import ImageGroup from './ImageGroup';
@@ -10,6 +12,7 @@ type FeedType = {
   category: string;
   place: string;
   description: string;
+  images: string[];
 };
 
 interface FeedProps {
@@ -17,11 +20,15 @@ interface FeedProps {
 }
 
 export function Feed({ data }: FeedProps) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <li key={data.id} className="mt-8">
-      {/* TODO: swiper 처리 */}
-      <div className="flex w-full">
-        <ImageGroup />
+      <div className="relative">
+        <div className="absolute z-10 top-4 text-body3 right-2 py-1 px-2 bg-gray-100 rounded-full">
+          {activeIndex + 1} / {data.images.length}
+        </div>
+        <ImageGroup images={data.images} setActiveIndex={setActiveIndex} />
       </div>
       <div className="p-4 bg-white relative">
         <div className="flex gap-2">
