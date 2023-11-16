@@ -119,7 +119,10 @@ export default function Chat() {
           />
         </button>
       </header>
-      <ol className="text-body3 overflow-y-auto flex-1" ref={contentsRef}>
+      <ol
+        className="text-body3 overflow-y-auto flex-1 bg-white"
+        ref={contentsRef}
+      >
         {messages.map((message) => (
           <MessageContainer key={message.id} sender={message.sender}>
             <ImageMessage urls={message.url} />
