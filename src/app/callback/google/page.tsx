@@ -15,9 +15,10 @@ const Page = () => {
     http
       .get(`/login/google?code=${code}`)
       .then((res: any) => {
-        document.cookie = `${TOKEN_KEY}=${res.data.accessToken}}`;
-        // localStorage.setItem('token', res.data.accessToken);
-        window.location.href = '/';
+        const token = res.data.accessToken;
+        document.cookie = `${TOKEN_KEY}=${encodeURIComponent(token)}; path=/;`;
+
+        window.location.href = '/main';
       })
       .catch((err) => {
         console.log(err);
