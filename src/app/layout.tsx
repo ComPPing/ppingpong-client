@@ -3,6 +3,8 @@ import { Noto_Sans_KR } from 'next/font/google';
 
 import clsx from 'clsx';
 
+import ReactQueryProvider from '@/utils/provider';
+
 import './globals.css';
 
 const notoSansKR = Noto_Sans_KR({
@@ -45,7 +47,9 @@ export default function RootLayout({
           'w-full m-auto max-h-screen bg-slate-50',
         )}
       >
-        <div className="m-auto max-w-md h-full flex flex-col">{children}</div>
+        <ReactQueryProvider>
+          <div className="m-auto max-w-md h-full flex flex-col">{children}</div>
+        </ReactQueryProvider>
       </body>
     </html>
   );

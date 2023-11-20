@@ -4,60 +4,30 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
+import { useSendMessage } from '@/apis/chat/mutations';
 import {
   ImageMessage,
   MessageContainer,
   TextMessage,
 } from '@/components/message';
-
-type MessageType = {
-  id: string;
-  sender: 'me' | 'other';
-  text?: string;
-  url?: string[];
-  date: Date;
-};
-
-const DUMMY_DATA: MessageType[] = [
-  {
-    id: '0',
-    sender: 'other',
-    text: '반가워 친구야~ 궁금한거 있으면 뭐든 물어봐!',
-    date: new Date(),
-  },
-  {
-    id: '2',
-    sender: 'me',
-    text: '음식점 추천해줭',
-    date: new Date(),
-  },
-  {
-    id: '1',
-    sender: 'other',
-    url: [
-      'http://via.placeholder.com/100x100',
-      'http://via.placeholder.com/100x100',
-      'http://via.placeholder.com/100x100',
-      'http://via.placeholder.com/100x100',
-    ],
-    text: '여기 어때?!',
-    date: new Date(),
-  },
-];
+// import { useGetTotalMessage } from '@/apis/chat/queries';
+import { Message as MessageType } from '@/types';
 
 export default function Chat() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<MessageType[]>(DUMMY_DATA);
+  const [messages, setMessages] = useState<MessageType[]>([]);
   const contentsRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  // const { data } = useGetTotalMessage();
+  const { mutateAsync: sendMessage, isLoading } = useSendMessage();
 
-  useEffect(() => {
-    contentsRef.current?.scrollTo({
-      top: contentsRef.current?.scrollHeight,
-      behavior: 'smooth',
-    });
-  }, [messages]);
+  // useEffect(() => {
+  //   contentsRef.current?.scrollTo({
+  //     top: contentsRef.current?.scrollHeight,
+  //     behavior: 'smooth',
+  //   });
+  // }, [data?.myMessageDtoList]);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -66,7 +36,6 @@ export default function Chat() {
 
   const handleKeyUpInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      // todo: api 요청
       handleSendMessage();
     }
   };
@@ -76,27 +45,23 @@ export default function Chat() {
     setMessages((prev) => [
       ...prev,
       {
-        id: new Date().toString(),
-        sender: 'me',
-        type: 'text',
-        text: input,
-        date: new Date(),
+        sender: 'user',
+        createdAt: new Date(),
+        content: input,
       },
     ]);
-    inputRef.current?.setAttribute('disabled', 'disabled');
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: new Date().toString(),
-          sender: 'other',
-          type: 'text',
-          text: '임시 답장!',
-          date: new Date(),
+    sendMessage(
+      { content: input },
+      {
+        onSuccess: ({ data }) => {
+          setMessages((prev) => [...prev, data]);
+          inputRef.current?.removeAttribute('disabled');
         },
-      ]);
-      inputRef.current?.removeAttribute('disabled');
-    }, 1000);
+        onSettled: () => {
+          inputRef.current?.setAttribute('disabled', 'disabled');
+        },
+      },
+    );
     setInput('');
   };
 
@@ -124,9 +89,12 @@ export default function Chat() {
         ref={contentsRef}
       >
         {messages.map((message) => (
-          <MessageContainer key={message.id} sender={message.sender}>
-            <ImageMessage urls={message.url} />
-            <TextMessage text={message.text} />
+          <MessageContainer
+            key={`${message.sender}${message.content}`}
+            sender={message.sender}
+          >
+            <ImageMessage urls={message.restaurantUrls} />
+            <TextMessage text={message.content} />
           </MessageContainer>
         ))}
       </ol>

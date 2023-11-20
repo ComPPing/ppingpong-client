@@ -3,32 +3,32 @@ import { resolveUrl } from '@/utils/url';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 export const http = {
-  get: <T, U>(url: string, header?: U) =>
-    __fetch<T, void, U>('get', url, true, header),
-  post: <T, D, U>(url: string, body: D, header?: U) =>
-    __fetch<T, D, U>('post', url, true, header, body),
-  put: <T, D, U>(url: string, body: D, header?: U) =>
-    __fetch<T, D, U>('put', url, true, header, body),
-  delete: <T, U>(url: string, header?: U) =>
-    __fetch<T, void, U>('delete', url, true, header),
+  get: <T>(url: string, header?: HeadersInit) =>
+    __fetch<T, void>('get', url, true, header),
+  post: <T, D>(url: string, body: D, header?: HeadersInit) =>
+    __fetch<T, D>('post', url, true, header, body),
+  put: <T, D, U>(url: string, body: D, header?: HeadersInit) =>
+    __fetch<T, D>('put', url, true, header, body),
+  delete: <T>(url: string, header?: HeadersInit) =>
+    __fetch<T, void>('delete', url, true, header),
 };
 
 export const httpWithoutBaseUrl = {
-  get: <T, U>(url: string, header?: U) =>
-    __fetch<T, void, U>('get', url, false, header),
-  post: <T, D, U>(url: string, body: D, header?: U) =>
-    __fetch<T, D, U>('post', url, false, header, body),
-  put: <T, D, U>(url: string, body: D, header?: U) =>
-    __fetch<T, D, U>('put', url, false, header, body),
-  delete: <T, U>(url: string, header?: U) =>
-    __fetch<T, void, U>('delete', url, false, header),
+  get: <T>(url: string, header?: HeadersInit) =>
+    __fetch<T, void>('get', url, false, header),
+  post: <T, D>(url: string, body: D, header?: HeadersInit) =>
+    __fetch<T, D>('post', url, false, header, body),
+  put: <T, D>(url: string, body: D, header?: HeadersInit) =>
+    __fetch<T, D>('put', url, false, header, body),
+  delete: <T>(url: string, header?: HeadersInit) =>
+    __fetch<T, void>('delete', url, false, header),
 };
 
-const __fetch = async <T, D, U>(
+const __fetch = async <T, D>(
   method: string,
   path: string,
   hasBaseUrl: boolean,
-  header?: U,
+  header?: HeadersInit,
   body?: D,
 ) => {
   const response = await fetch(hasBaseUrl ? resolveUrl(BASE_URL, path) : path, {
