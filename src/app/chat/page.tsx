@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useSendMessage } from '@/apis/chat/mutations';
+import { useGetTotalMessage } from '@/apis/chat/queries';
 import {
   ImageMessage,
   MessageContainer,
   TextMessage,
 } from '@/components/message';
-// import { useGetTotalMessage } from '@/apis/chat/queries';
 import { Message as MessageType } from '@/types';
 
 export default function Chat() {
@@ -19,8 +19,8 @@ export default function Chat() {
   const contentsRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  // const { data } = useGetTotalMessage();
-  const { mutateAsync: sendMessage, isLoading } = useSendMessage();
+  const { data } = useGetTotalMessage();
+  const { mutateAsync: sendMessage } = useSendMessage();
 
   // useEffect(() => {
   //   contentsRef.current?.scrollTo({
@@ -42,6 +42,8 @@ export default function Chat() {
 
   const handleSendMessage = () => {
     if (input === '') return;
+    inputRef.current?.setAttribute('disabled', 'disabled');
+
     setMessages((prev) => [
       ...prev,
       {
@@ -53,12 +55,12 @@ export default function Chat() {
     sendMessage(
       { content: input },
       {
-        onSuccess: ({ data }) => {
-          setMessages((prev) => [...prev, data]);
+        onSuccess: (message) => {
+          setMessages((prev) => [...prev, message]);
           inputRef.current?.removeAttribute('disabled');
         },
         onSettled: () => {
-          inputRef.current?.setAttribute('disabled', 'disabled');
+          inputRef.current?.removeAttribute('disabled');
         },
       },
     );
@@ -88,7 +90,7 @@ export default function Chat() {
         className="text-body3 overflow-y-auto flex-1 bg-white"
         ref={contentsRef}
       >
-        {messages.map((message) => (
+        {data?.totalMessages.map((message) => (
           <MessageContainer
             key={`${message.sender}${message.content}`}
             sender={message.sender}
