@@ -7,9 +7,7 @@ export type API = {
         content: string;
       };
     };
-    response: {
-      data: Message;
-    };
+    response: Message;
   };
   getTotalMessages: {
     response: {
