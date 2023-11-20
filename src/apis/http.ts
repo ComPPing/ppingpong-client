@@ -1,3 +1,5 @@
+import { TOKEN_KEY } from '@/constants/token';
+import { deleteCookie } from '@/utils/cookie';
 import { resolveUrl } from '@/utils/url';
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
@@ -42,16 +44,23 @@ const __fetch = async <T, D>(
 
   if (!response.ok) {
     const error = new Error();
-    const text = await response.text();
-    error.message = text;
-    error.name = response.statusText;
-    throw error;
+
+    // @note: 401은 토큰이 만료되었거나, 토큰이 없는 경우이므로, 토큰을 삭제하고 로그인 페이지로 이동한다.
+    if (response.status === 401) {
+      deleteCookie(TOKEN_KEY);
+      window.location.href = '/login';
+    } else {
+      const text = await response.text();
+      error.message = text;
+      error.name = response.statusText;
+      throw error;
+    }
   }
 
   if (response.headers.get('Content-length') === '0') {
     return {} as T;
   }
 
-  const data = await response.json();
+  const { data } = await response.json();
   return data as T;
 };
