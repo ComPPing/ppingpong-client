@@ -13,6 +13,7 @@ export default function ReactQueryProvider({ children }: PropsWithChildren) {
         queries: {
           staleTime: 60 * 1000 * 7,
           refetchOnWindowFocus: false,
+          retry: 0,
         },
       },
     }),
