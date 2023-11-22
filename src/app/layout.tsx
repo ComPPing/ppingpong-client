@@ -3,7 +3,7 @@ import { Noto_Sans_KR } from 'next/font/google';
 
 import clsx from 'clsx';
 
-import ReactQueryProvider from '@/utils/provider';
+import ReactQueryProvider from '@/utils/reactQueryProvider';
 
 import './globals.css';
 
