@@ -1,4 +1,4 @@
-import { TOKEN_KEY } from '@/constants/token';
+import { TOKEN_KEY } from '@/constants';
 import { deleteCookie } from '@/utils/cookie';
 import { resolveUrl } from '@/utils/url';
 

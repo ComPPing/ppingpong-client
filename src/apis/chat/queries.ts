@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { TOKEN_KEY } from '@/constants/token';
+import { TOKEN_KEY } from '@/constants';
 import { getCookie } from '@/utils/cookie';
 
 import { http } from '../http';

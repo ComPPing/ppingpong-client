@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { TOKEN_KEY } from '@/constants/token';
+import { TOKEN_KEY } from '@/constants';
 
 const LOGIN_URL = '/login';
 const HOME_URL = '/main';
