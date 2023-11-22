@@ -6,3 +6,5 @@ export type Message = {
 };
 
 export type SenderType = 'user' | 'assistant';
+
+export type OAuthProvider = 'google' | 'kakao';
