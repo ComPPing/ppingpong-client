@@ -3,7 +3,7 @@ import React from 'react';
 
 import { OAuthButton } from '@/components/button';
 
-const page = () => {
+const Login = () => {
   return (
     <main className="h-full bg-primary-50 flex items-center justify-center flex-col px-6 py-12">
       <div className="flex-1 flex items-center">
@@ -22,4 +22,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;
