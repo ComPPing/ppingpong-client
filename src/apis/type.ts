@@ -14,4 +14,12 @@ export type API = {
       totalMessages: Message[];
     };
   };
+  oauthLogin: {
+    response: {
+      id: number;
+      name: string;
+      createdAt: Date;
+      accessToken: string;
+    };
+  };
 };
