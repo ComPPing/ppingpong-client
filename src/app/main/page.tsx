@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Feed } from '@/components/feed';
 
@@ -41,10 +39,6 @@ const DUMMY_DATA: FeedType[] = [
 ];
 
 const Main = () => {
-  useEffect(() => {
-    // localStorage.getItem('token') ?? window.location.replace('/login');
-  }, []);
-
   return (
     <main className="overflow-y-auto flex-1 bg-gray-200">
       <ul className="">
