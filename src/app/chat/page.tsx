@@ -13,21 +13,31 @@ import {
 } from '@/components/message';
 import { Message as MessageType } from '@/types';
 
+const InitData: MessageType[] = [
+  {
+    sender: 'assistant',
+    createdAt: new Date(),
+    content: '안녕하세요. 무엇을 드시고 싶으신가요?',
+  },
+];
+
 export default function Chat() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<MessageType[]>([]);
+  const { data } = useGetTotalMessage();
+  const [messages, setMessages] = useState<MessageType[]>(
+    data?.totalMessages ?? InitData,
+  );
   const contentsRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { data } = useGetTotalMessage();
   const { mutateAsync: sendMessage } = useSendMessage();
 
-  // useEffect(() => {
-  //   contentsRef.current?.scrollTo({
-  //     top: contentsRef.current?.scrollHeight,
-  //     behavior: 'smooth',
-  //   });
-  // }, [data?.myMessageDtoList]);
+  useEffect(() => {
+    contentsRef.current?.scrollTo({
+      top: contentsRef.current?.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [messages]);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -90,7 +100,7 @@ export default function Chat() {
         className="text-body3 overflow-y-auto flex-1 bg-white"
         ref={contentsRef}
       >
-        {data?.totalMessages.map((message) => (
+        {messages.map((message) => (
           <MessageContainer
             key={`${message.sender}${message.content}`}
             sender={message.sender}
