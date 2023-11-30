@@ -24,7 +24,7 @@ const ImageGroup = ({ images, setActiveIndex }: ImageGroupProps) => {
               src={image}
               width="100%"
               height="100%"
-              className="w-full"
+              className="w-full h-72 object-cover"
               alt="임시 이미지"
             />
           </SwiperSlide>

@@ -1,4 +1,6 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 
 import { TOKEN_KEY } from '@/constants';
 import { getCookie } from '@/utils/cookie';
@@ -9,7 +11,7 @@ import { API } from '../type';
 export const useGetTotalMessage = () => {
   type Response = API['getTotalMessages']['response'];
 
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: ['messages'],
     queryFn: async () => {
       return await http.get<Response>(`/api/s/messages`, {
