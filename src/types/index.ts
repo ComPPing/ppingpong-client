@@ -2,7 +2,7 @@ export type Message = {
   sender: SenderType;
   createdAt: Date;
   content: string;
-  restaurantUrls?: string[];
+  urls?: string[];
 };
 
 export type SenderType = 'user' | 'assistant';

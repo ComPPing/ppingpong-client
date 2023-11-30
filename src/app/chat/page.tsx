@@ -105,7 +105,7 @@ export default function Chat() {
             key={`${message.sender}${message.content}`}
             sender={message.sender}
           >
-            <ImageMessage urls={message.restaurantUrls} />
+            <ImageMessage urls={message.urls} />
             <TextMessage text={message.content} />
           </MessageContainer>
         ))}

@@ -5,20 +5,18 @@ interface ImageMessageProps {
 export const ImageMessage = ({ urls }: ImageMessageProps) => {
   if (!urls) return null;
   return (
-    <div className="max-w-fit overflow-x-auto block whitespace-nowrap">
-      {urls?.map((url) => (
+    <div>
+      {urls?.map((url, index) => (
         <button
           key={url}
           type="button"
-          className="w-30 h-30 mr-2 rounded-lg inline-flex items-center justify-center"
+          className="w-30 h-30 mr-2 rounded-lg flex items-center justify-center "
           onClick={() => {
-            // FIXME: 임시 url
-            window.open(
-              'https://map.naver.com/p/entry/place/1028649657?c=15.00,0,0,0,dh',
-            );
+            window.open(url, '_blank');
           }}
         >
-          <img src={url} alt="img" className="rounded-lg" />
+          장소 {index + 1}
+          {/* <img src={url} alt="img" className="rounded-lg" /> */}
         </button>
       ))}
     </div>
