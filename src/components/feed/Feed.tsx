@@ -2,18 +2,10 @@
 
 import React, { useState } from 'react';
 
+import { Feed as FeedType } from '@/types';
+
 import Bookmark from './Bookmark';
 import ImageGroup from './ImageGroup';
-
-// FIXME
-type FeedType = {
-  id: string;
-  restaurantName: string;
-  category: string;
-  place: string;
-  description: string;
-  images: string[];
-};
 
 interface FeedProps {
   data: FeedType;
@@ -37,7 +29,7 @@ export function Feed({ data }: FeedProps) {
         </div>
         <div className="text-gray-700 text-body3">{data.place}</div>
         <div className="text-body3 mt-2 text-gray-900">{data.description}</div>
-        <Bookmark id={data.id} />
+        <Bookmark id={`${data.id}-bookmaark`} />
       </div>
     </li>
   );
